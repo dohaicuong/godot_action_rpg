@@ -105,6 +105,7 @@ roll={
 2d_physics/layer_3="player_hurtbox"
 2d_physics/layer_4="enemy_hurtbox"
 2d_physics/layer_5="enemy"
+2d_physics/layer_6="soft_collision"
 
 [physics]
 

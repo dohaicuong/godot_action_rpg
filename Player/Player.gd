@@ -89,7 +89,7 @@ func roll_system(input_vector):
 func on_roll_animation_finished():
 	state = MOVE
 
-func _on_hurtbox_area_entered(area):
+func _on_hurtbox_area_entered(_area):
 	stats.health -= 1
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
