@@ -1,8 +1,10 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://hitboxes/hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/sword_hitbox.gd" type="Script" id=4]
+[ext_resource path="res://hitboxes/hurtbox.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -634,6 +636,10 @@ graph_offset = Vector2( -305, -16 )
 [sub_resource type="CapsuleShape2D" id=36]
 height = 12.0
 
+[sub_resource type="CapsuleShape2D" id=48]
+radius = 5.0
+height = 6.0
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -671,10 +677,10 @@ anims/run_up = SubResource( 10 )
 tree_root = SubResource( 12 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 13 )
-parameters/attack/blend_position = Vector2( -0.515055, 0.048913 )
-parameters/idle/blend_position = Vector2( 0.00792396, -0.0284483 )
-parameters/roll/blend_position = Vector2( 0, 0 )
-parameters/run/blend_position = Vector2( 0, 0 )
+parameters/attack/blend_position = Vector2( 0, 1 )
+parameters/idle/blend_position = Vector2( 0, 1 )
+parameters/roll/blend_position = Vector2( 0, 1 )
+parameters/run/blend_position = Vector2( 0, 1 )
 
 [node name="hitbox_pivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
@@ -686,9 +692,20 @@ __meta__ = {
 [node name="sword_hitbox" parent="hitbox_pivot" instance=ExtResource( 3 )]
 position = Vector2( 15, 0 )
 collision_mask = 8
+script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="hitbox_pivot/sword_hitbox" index="0"]
 shape = SubResource( 36 )
 disabled = true
 
+[node name="hurtbox" parent="." instance=ExtResource( 5 )]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="hurtbox" index="0"]
+position = Vector2( 0, -6 )
+shape = SubResource( 48 )
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+
 [editable path="hitbox_pivot/sword_hitbox"]
+[editable path="hurtbox"]

@@ -14,6 +14,10 @@ config/name="Action Rpg"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerStats="*res://Player/player_stats.tscn"
+
 [display]
 
 window/size/width=320
@@ -100,6 +104,7 @@ roll={
 2d_physics/layer_2="player"
 2d_physics/layer_3="player_hurtbox"
 2d_physics/layer_4="enemy_hurtbox"
+2d_physics/layer_5="enemy"
 
 [physics]
 
