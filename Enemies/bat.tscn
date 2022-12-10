@@ -48,7 +48,7 @@ radius = 66.1211
 
 [sub_resource type="CapsuleShape2D" id=10]
 radius = 4.0
-height = 0.0
+height = 6.0
 
 [node name="bat" type="KinematicBody2D"]
 collision_layer = 16
@@ -58,7 +58,7 @@ script = ExtResource( 4 )
 [node name="bat" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "fly"
-frame = 4
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -88,7 +88,7 @@ shape = SubResource( 9 )
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="hitbox" index="0"]
-position = Vector2( 0, -14 )
+position = Vector2( 0, -13 )
 shape = SubResource( 10 )
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
