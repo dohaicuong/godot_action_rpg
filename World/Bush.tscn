@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://World/Bush.png" type="Texture" id=1]
+[ext_resource path="res://Shadows/LargeShadow.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -10,6 +11,9 @@ height = 12.0
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="Shadow" type="Sprite" parent="."]
+texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -4 )
