@@ -1,0 +1,18 @@
+[gd_scene format=2]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 160, 90 )
+current = true
+process_mode = 0
+limit_left = -200
+limit_top = -200
+limit_right = 500
+limit_bottom = 500
+smoothing_enabled = true
+
+[node name="Limits" type="Node" parent="."]
+
+[node name="TopLeft" type="Position2D" parent="Limits"]
+
+[node name="BottomRight" type="Position2D" parent="Limits"]
+position = Vector2( 320, 180 )

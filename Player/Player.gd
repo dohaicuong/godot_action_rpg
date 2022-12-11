@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
+
 const ACCELERATION = 10
 const MAX_SPEED = 100
 const ROLL_SPEED = 125
@@ -18,6 +20,7 @@ onready var roll_vector = Vector2.DOWN
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var animationState = animationTree.get('parameters/playback')
 onready var swordHitbox = $hitbox_pivot/sword_hitbox
 onready var hurtbox = $hurtbox
@@ -90,7 +93,17 @@ func roll_system(input_vector):
 func on_roll_animation_finished():
 	state = MOVE
 
-func _on_hurtbox_area_entered(_area):
-	stats.health -= 1
-	hurtbox.start_invincibility(0.5)
+func _on_hurtbox_area_entered(area):
+	stats.health -= area.damage
+	hurtbox.start_invincibility(0.6)
 	hurtbox.create_hit_effect()
+	var playerHurtSound = PlayerHurtSound.instance()
+	get_tree().current_scene.add_child(playerHurtSound)
+
+
+func _on_hurtbox_invincibility_started():
+	blinkAnimationPlayer.play("Start")
+
+
+func _on_hurtbox_invincibility_ended():
+	blinkAnimationPlayer.play("Stop")

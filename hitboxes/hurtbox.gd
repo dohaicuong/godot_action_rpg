@@ -5,8 +5,9 @@ export var show_hit = true
 const hit_effect = preload("res://Effects/hit_effect.tscn")
 
 onready var timer = $Timer
-var invincible = false setget set_invincible
+onready var collisionShape = $CollisionShape2D
 
+var invincible = false setget set_invincible
 signal invincibility_started
 signal invincibility_ended
 
@@ -29,7 +30,7 @@ func create_hit_effect():
 	effect.global_position = global_position
 
 func _on_hurtbox_invincibility_started():
-	set_deferred("monitorable", false)
+	collisionShape.set_deferred("disabled", true)
 
 func _on_hurtbox_invincibility_ended():
-	monitorable = true
+	collisionShape.disabled = false
